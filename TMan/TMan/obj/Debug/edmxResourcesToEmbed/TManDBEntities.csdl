@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TManDBEntities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="TManDBEntitiesContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UsersSet" EntityType="TManDBEntities.Users" />
+    <EntitySet Name="TasksSet" EntityType="TManDBEntities.Tasks" />
+    <EntitySet Name="CommentsSet" EntityType="TManDBEntities.Comments" />
+    <AssociationSet Name="TasksUsers" Association="TManDBEntities.TasksUsers">
+      <End Role="Tasks" EntitySet="TasksSet" />
+      <End Role="Users" EntitySet="UsersSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsersComments" Association="TManDBEntities.UsersComments">
+      <End Role="Users" EntitySet="UsersSet" />
+      <End Role="Comments" EntitySet="CommentsSet" />
+    </AssociationSet>
+    <AssociationSet Name="TasksComments" Association="TManDBEntities.TasksComments">
+      <End Role="Tasks" EntitySet="TasksSet" />
+      <End Role="Comments" EntitySet="CommentsSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <Property Name="Administrator" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Estimation" Type="Int16" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" />
+    <Property Name="DateLastModified" Type="DateTime" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="AssignedTo" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" />
+    <Property Name="ToTask" Type="Int32" Nullable="false" />
+    <Property Name="MadeBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="TasksUsers">
+    <End Type="TManDBEntities.Tasks" Role="Tasks" Multiplicity="*" />
+    <End Type="TManDBEntities.Users" Role="Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="AssignedTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersComments">
+    <End Type="TManDBEntities.Users" Role="Users" Multiplicity="1" />
+    <End Type="TManDBEntities.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="MadeBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TasksComments">
+    <End Type="TManDBEntities.Tasks" Role="Tasks" Multiplicity="1" />
+    <End Type="TManDBEntities.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ToTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
