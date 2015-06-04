@@ -59,6 +59,10 @@
     <Compile Include="AdministratorDialog.Designer.cs">
       <DependentUpon>AdministratorDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>TManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\UserRolesEnum.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +76,27 @@
     </Compile>
     <Compile Include="RegularUserDialog.Designer.cs">
       <DependentUpon>RegularUserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TManDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TManDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TManDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TManDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TManDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TMTask.cs">
+      <DependentUpon>TManDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TMUser.cs">
+      <DependentUpon>TManDB.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdministratorDialog.resx">
       <DependentUpon>AdministratorDialog.cs</DependentUpon>
@@ -101,6 +126,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="TManDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TManDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TManDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TManDB.edmx</DependentUpon>
+      <LastGenOutput>TManDB.Context.cs</LastGenOutput>
+    </None>
+    <None Include="TManDB.edmx.diagram">
+      <DependentUpon>TManDB.edmx</DependentUpon>
+    </None>
+    <None Include="TManDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TManDB.edmx</DependentUpon>
+      <LastGenOutput>TManDB.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TManDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MadeBy" Type="int" />
+    <Property Name="Text" Type="text" />
+    <Property Name="ToTask" Type="int" />
+  </EntityType>
+  <EntityType Name="TMTasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="AssignedTo" Type="int" />
+    <Property Name="Description" Type="text" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Estimation" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="DateLastModified" Type="datetime" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TMUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TMTasks_TMTasks">
+    <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="1" />
+    <End Role="TMTasks1" Type="Self.TMTasks" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TMTasks">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TMTasks1">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TManDBModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMTasks" EntityType="Self.TMTasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMUsers" EntityType="Self.TMUsers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TMTasks_TMTasks" Association="Self.FK_TMTasks_TMTasks">
+      <End Role="TMTasks" EntitySet="TMTasks" />
+      <End Role="TMTasks1" EntitySet="TMTasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

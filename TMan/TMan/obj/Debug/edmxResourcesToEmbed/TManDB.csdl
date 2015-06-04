@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TManDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MadeBy" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ToTask" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TMTask">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AssignedTo" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="Estimation" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TMTasks1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks" ToRole="TMTasks1" />
+    <NavigationProperty Name="TMTask1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks1" ToRole="TMTasks" />
+  </EntityType>
+  <EntityType Name="TMUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TMTasks_TMTasks">
+    <End Role="TMTasks" Type="Self.TMTask" Multiplicity="1" />
+    <End Role="TMTasks1" Type="Self.TMTask" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TMTasks">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TMTasks1">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TManDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="TMTasks" EntityType="Self.TMTask" />
+    <EntitySet Name="TMUsers" EntityType="Self.TMUser" />
+    <AssociationSet Name="FK_TMTasks_TMTasks" Association="Self.FK_TMTasks_TMTasks">
+      <End Role="TMTasks" EntitySet="TMTasks" />
+      <End Role="TMTasks1" EntitySet="TMTasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

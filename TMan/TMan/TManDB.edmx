@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TManDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MadeBy" Type="int" />
+          <Property Name="Text" Type="text" />
+          <Property Name="ToTask" Type="int" />
+        </EntityType>
+        <EntityType Name="TMTasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="Description" Type="text" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Estimation" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="DateLastModified" Type="datetime" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TMUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TMTasks_TMTasks">
+          <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="1" />
+          <End Role="TMTasks1" Type="Self.TMTasks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TMTasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TMTasks1">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TManDBModelStoreContainer">
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TMTasks" EntityType="Self.TMTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TMUsers" EntityType="Self.TMUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TMTasks_TMTasks" Association="Self.FK_TMTasks_TMTasks">
+            <End Role="TMTasks" EntitySet="TMTasks" />
+            <End Role="TMTasks1" EntitySet="TMTasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TManDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MadeBy" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ToTask" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TMTask">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Estimation" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TMTasks1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks" ToRole="TMTasks1" />
+          <NavigationProperty Name="TMTask1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks1" ToRole="TMTasks" />
+        </EntityType>
+        <EntityType Name="TMUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TMTasks_TMTasks">
+          <End Role="TMTasks" Type="Self.TMTask" Multiplicity="1" />
+          <End Role="TMTasks1" Type="Self.TMTask" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TMTasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TMTasks1">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TManDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="TMTasks" EntityType="Self.TMTask" />
+          <EntitySet Name="TMUsers" EntityType="Self.TMUser" />
+          <AssociationSet Name="FK_TMTasks_TMTasks" Association="Self.FK_TMTasks_TMTasks">
+            <End Role="TMTasks" EntitySet="TMTasks" />
+            <End Role="TMTasks1" EntitySet="TMTasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TManDBModelStoreContainer" CdmEntityContainer="TManDBEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="TManDBModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="MadeBy" ColumnName="MadeBy" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ToTask" ColumnName="ToTask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TMTasks">
+            <EntityTypeMapping TypeName="TManDBModel.TMTask">
+              <MappingFragment StoreEntitySet="TMTasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Estimation" ColumnName="Estimation" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TMUsers">
+            <EntityTypeMapping TypeName="TManDBModel.TMUser">
+              <MappingFragment StoreEntitySet="TMUsers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
