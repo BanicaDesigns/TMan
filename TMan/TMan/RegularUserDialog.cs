@@ -146,5 +146,26 @@ namespace TMan
                 return taskFromDb;
             }
         }
+
+        private void btnAddNewComment_Click(object sender, EventArgs e)
+        {
+            var newCommentText = tbNewComment.Text;
+            var newCommentMadeByUserId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
+            var newCommentMadeByUserName = Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[1];
+            var newCommentToTask = Convert.ToInt32(tbSelectedTaskId.Text);
+
+            lbComments.Items.Add(string.Format("{0}: {1}", newCommentMadeByUserName, newCommentText));
+
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                entities.Database.Connection.Open();
+
+                entities.Comments.Add(new Comment() { MadeBy = newCommentMadeByUserId, ToTask = newCommentToTask, Text = newCommentText });
+
+                tbNewComment.Clear();
+
+                entities.SaveChanges();
+            }
+        }
     }
 }

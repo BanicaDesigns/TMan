@@ -30,6 +30,18 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabTaskManagement = new System.Windows.Forms.TabPage();
+            this.btnAddNewTask = new System.Windows.Forms.Button();
+            this.btnDeleteTask = new System.Windows.Forms.Button();
+            this.btnEditTask = new System.Windows.Forms.Button();
+            this.btnAddNewComment = new System.Windows.Forms.Button();
+            this.tbNewComment = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbComments = new System.Windows.Forms.ListBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbSelectedTaskEstimation = new System.Windows.Forms.TextBox();
+            this.dtpSelectedTaskLastModified = new System.Windows.Forms.DateTimePicker();
+            this.dtpSelectedTaskDateCreated = new System.Windows.Forms.DateTimePicker();
+            this.tbSelectedTaskCreatedBy = new System.Windows.Forms.TextBox();
             this.cbSelectedTaskAssignedTo = new System.Windows.Forms.ComboBox();
             this.cbSelectedTasStatus = new System.Windows.Forms.ComboBox();
             this.tbSelectedTaskDescription = new System.Windows.Forms.TextBox();
@@ -47,18 +59,6 @@
             this.lbAllTasksRelatedToMe = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tbSelectedTaskCreatedBy = new System.Windows.Forms.TextBox();
-            this.dtpSelectedTaskDateCreated = new System.Windows.Forms.DateTimePicker();
-            this.dtpSelectedTaskLastModified = new System.Windows.Forms.DateTimePicker();
-            this.tbSelectedTaskEstimation = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tbNewComment = new System.Windows.Forms.TextBox();
-            this.btnAddNewComment = new System.Windows.Forms.Button();
-            this.lbComments = new System.Windows.Forms.ListBox();
-            this.btnEditTask = new System.Windows.Forms.Button();
-            this.btnDeleteTask = new System.Windows.Forms.Button();
-            this.btnAddNewTask = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabTaskManagement.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -112,6 +112,116 @@
             this.tabTaskManagement.UseVisualStyleBackColor = true;
             this.tabTaskManagement.Click += new System.EventHandler(this.tabPage1_Click);
             this.tabTaskManagement.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // btnAddNewTask
+            // 
+            this.btnAddNewTask.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnAddNewTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnAddNewTask.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAddNewTask.Location = new System.Drawing.Point(444, 422);
+            this.btnAddNewTask.Name = "btnAddNewTask";
+            this.btnAddNewTask.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNewTask.TabIndex = 26;
+            this.btnAddNewTask.Text = "New task";
+            this.btnAddNewTask.UseVisualStyleBackColor = false;
+            // 
+            // btnDeleteTask
+            // 
+            this.btnDeleteTask.BackColor = System.Drawing.Color.Salmon;
+            this.btnDeleteTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteTask.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteTask.Location = new System.Drawing.Point(10, 427);
+            this.btnDeleteTask.Name = "btnDeleteTask";
+            this.btnDeleteTask.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteTask.TabIndex = 25;
+            this.btnDeleteTask.Text = "Delete task";
+            this.btnDeleteTask.UseVisualStyleBackColor = false;
+            // 
+            // btnEditTask
+            // 
+            this.btnEditTask.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnEditTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnEditTask.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnEditTask.Location = new System.Drawing.Point(321, 422);
+            this.btnEditTask.Name = "btnEditTask";
+            this.btnEditTask.Size = new System.Drawing.Size(117, 23);
+            this.btnEditTask.TabIndex = 24;
+            this.btnEditTask.Text = "Save Changes";
+            this.btnEditTask.UseVisualStyleBackColor = false;
+            // 
+            // btnAddNewComment
+            // 
+            this.btnAddNewComment.Location = new System.Drawing.Point(271, 346);
+            this.btnAddNewComment.Name = "btnAddNewComment";
+            this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNewComment.TabIndex = 23;
+            this.btnAddNewComment.Text = "Comment";
+            this.btnAddNewComment.UseVisualStyleBackColor = true;
+            this.btnAddNewComment.Click += new System.EventHandler(this.btnAddNewComment_Click);
+            // 
+            // tbNewComment
+            // 
+            this.tbNewComment.Location = new System.Drawing.Point(271, 274);
+            this.tbNewComment.Multiline = true;
+            this.tbNewComment.Name = "tbNewComment";
+            this.tbNewComment.Size = new System.Drawing.Size(248, 57);
+            this.tbNewComment.TabIndex = 22;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lbComments);
+            this.panel1.Location = new System.Drawing.Point(10, 268);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(248, 110);
+            this.panel1.TabIndex = 21;
+            // 
+            // lbComments
+            // 
+            this.lbComments.FormattingEnabled = true;
+            this.lbComments.Location = new System.Drawing.Point(4, 4);
+            this.lbComments.Name = "lbComments";
+            this.lbComments.Size = new System.Drawing.Size(237, 95);
+            this.lbComments.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(7, 249);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(133, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Comments to the task:";
+            // 
+            // tbSelectedTaskEstimation
+            // 
+            this.tbSelectedTaskEstimation.Location = new System.Drawing.Point(352, 228);
+            this.tbSelectedTaskEstimation.Name = "tbSelectedTaskEstimation";
+            this.tbSelectedTaskEstimation.Size = new System.Drawing.Size(162, 20);
+            this.tbSelectedTaskEstimation.TabIndex = 19;
+            // 
+            // dtpSelectedTaskLastModified
+            // 
+            this.dtpSelectedTaskLastModified.Location = new System.Drawing.Point(388, 198);
+            this.dtpSelectedTaskLastModified.Name = "dtpSelectedTaskLastModified";
+            this.dtpSelectedTaskLastModified.Size = new System.Drawing.Size(126, 20);
+            this.dtpSelectedTaskLastModified.TabIndex = 18;
+            // 
+            // dtpSelectedTaskDateCreated
+            // 
+            this.dtpSelectedTaskDateCreated.Location = new System.Drawing.Point(360, 173);
+            this.dtpSelectedTaskDateCreated.Name = "dtpSelectedTaskDateCreated";
+            this.dtpSelectedTaskDateCreated.Size = new System.Drawing.Size(154, 20);
+            this.dtpSelectedTaskDateCreated.TabIndex = 17;
+            // 
+            // tbSelectedTaskCreatedBy
+            // 
+            this.tbSelectedTaskCreatedBy.Location = new System.Drawing.Point(352, 136);
+            this.tbSelectedTaskCreatedBy.Name = "tbSelectedTaskCreatedBy";
+            this.tbSelectedTaskCreatedBy.ReadOnly = true;
+            this.tbSelectedTaskCreatedBy.Size = new System.Drawing.Size(162, 20);
+            this.tbSelectedTaskCreatedBy.TabIndex = 16;
             // 
             // cbSelectedTaskAssignedTo
             // 
@@ -269,119 +379,10 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(530, 358);
+            this.tabPage2.Size = new System.Drawing.Size(530, 456);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Submit work on tasks";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tbSelectedTaskCreatedBy
-            // 
-            this.tbSelectedTaskCreatedBy.Location = new System.Drawing.Point(352, 136);
-            this.tbSelectedTaskCreatedBy.Name = "tbSelectedTaskCreatedBy";
-            this.tbSelectedTaskCreatedBy.ReadOnly = true;
-            this.tbSelectedTaskCreatedBy.Size = new System.Drawing.Size(162, 20);
-            this.tbSelectedTaskCreatedBy.TabIndex = 16;
-            // 
-            // dtpSelectedTaskDateCreated
-            // 
-            this.dtpSelectedTaskDateCreated.Location = new System.Drawing.Point(360, 173);
-            this.dtpSelectedTaskDateCreated.Name = "dtpSelectedTaskDateCreated";
-            this.dtpSelectedTaskDateCreated.Size = new System.Drawing.Size(154, 20);
-            this.dtpSelectedTaskDateCreated.TabIndex = 17;
-            // 
-            // dtpSelectedTaskLastModified
-            // 
-            this.dtpSelectedTaskLastModified.Location = new System.Drawing.Point(388, 198);
-            this.dtpSelectedTaskLastModified.Name = "dtpSelectedTaskLastModified";
-            this.dtpSelectedTaskLastModified.Size = new System.Drawing.Size(126, 20);
-            this.dtpSelectedTaskLastModified.TabIndex = 18;
-            // 
-            // tbSelectedTaskEstimation
-            // 
-            this.tbSelectedTaskEstimation.Location = new System.Drawing.Point(352, 228);
-            this.tbSelectedTaskEstimation.Name = "tbSelectedTaskEstimation";
-            this.tbSelectedTaskEstimation.Size = new System.Drawing.Size(162, 20);
-            this.tbSelectedTaskEstimation.TabIndex = 19;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(7, 249);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(133, 13);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Comments to the task:";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.lbComments);
-            this.panel1.Location = new System.Drawing.Point(10, 268);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 110);
-            this.panel1.TabIndex = 21;
-            // 
-            // tbNewComment
-            // 
-            this.tbNewComment.Location = new System.Drawing.Point(271, 274);
-            this.tbNewComment.Multiline = true;
-            this.tbNewComment.Name = "tbNewComment";
-            this.tbNewComment.Size = new System.Drawing.Size(248, 57);
-            this.tbNewComment.TabIndex = 22;
-            // 
-            // btnAddNewComment
-            // 
-            this.btnAddNewComment.Location = new System.Drawing.Point(271, 346);
-            this.btnAddNewComment.Name = "btnAddNewComment";
-            this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
-            this.btnAddNewComment.TabIndex = 23;
-            this.btnAddNewComment.Text = "Comment";
-            this.btnAddNewComment.UseVisualStyleBackColor = true;
-            // 
-            // lbComments
-            // 
-            this.lbComments.FormattingEnabled = true;
-            this.lbComments.Location = new System.Drawing.Point(4, 4);
-            this.lbComments.Name = "lbComments";
-            this.lbComments.Size = new System.Drawing.Size(237, 95);
-            this.lbComments.TabIndex = 0;
-            // 
-            // btnEditTask
-            // 
-            this.btnEditTask.BackColor = System.Drawing.Color.SkyBlue;
-            this.btnEditTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnEditTask.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditTask.Location = new System.Drawing.Point(363, 422);
-            this.btnEditTask.Name = "btnEditTask";
-            this.btnEditTask.Size = new System.Drawing.Size(75, 23);
-            this.btnEditTask.TabIndex = 24;
-            this.btnEditTask.Text = "Edit task";
-            this.btnEditTask.UseVisualStyleBackColor = false;
-            // 
-            // btnDeleteTask
-            // 
-            this.btnDeleteTask.BackColor = System.Drawing.Color.Salmon;
-            this.btnDeleteTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteTask.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteTask.Location = new System.Drawing.Point(10, 427);
-            this.btnDeleteTask.Name = "btnDeleteTask";
-            this.btnDeleteTask.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteTask.TabIndex = 25;
-            this.btnDeleteTask.Text = "Delete task";
-            this.btnDeleteTask.UseVisualStyleBackColor = false;
-            // 
-            // btnAddNewTask
-            // 
-            this.btnAddNewTask.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnAddNewTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnAddNewTask.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddNewTask.Location = new System.Drawing.Point(444, 422);
-            this.btnAddNewTask.Name = "btnAddNewTask";
-            this.btnAddNewTask.Size = new System.Drawing.Size(75, 23);
-            this.btnAddNewTask.TabIndex = 26;
-            this.btnAddNewTask.Text = "New task";
-            this.btnAddNewTask.UseVisualStyleBackColor = false;
             // 
             // RegularUserDialog
             // 
