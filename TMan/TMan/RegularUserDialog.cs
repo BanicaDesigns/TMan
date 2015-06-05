@@ -21,5 +21,34 @@ namespace TMan
         {
             Application.Exit();
         }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                entities.Database.Connection.Open();
+
+                var userId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
+
+                var tasksRelatedToMe = (from task in entities.TMTasks
+                                        where task.AssignedTo == userId || task.CreatedBy == userId
+                                        select task).ToArray();
+
+                lbAllTasksRelatedToMe.Items.Clear();
+
+                foreach (var task in tasksRelatedToMe)
+                {
+                    lbAllTasksRelatedToMe.Items.Add(string.Format(Properties.Resources.TASK_LABEL_LAYOUT
+                                                                , task.TaskId
+                                                                , task.Title
+                                                                , task.Status));
+                }
+            }
+        }
     }
 }

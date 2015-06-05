@@ -12,3 +12,4 @@ C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.dll
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.xml
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.csprojResolveAssemblyReference.cache
