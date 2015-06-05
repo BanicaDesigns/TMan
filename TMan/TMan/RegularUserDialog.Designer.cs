@@ -252,6 +252,7 @@
             this.lbAllTasksRelatedToMe.Name = "lbAllTasksRelatedToMe";
             this.lbAllTasksRelatedToMe.Size = new System.Drawing.Size(252, 212);
             this.lbAllTasksRelatedToMe.TabIndex = 1;
+            this.lbAllTasksRelatedToMe.SelectedIndexChanged += new System.EventHandler(this.lbAllTasksRelatedToMe_SelectedIndexChanged);
             // 
             // label1
             // 

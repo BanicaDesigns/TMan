@@ -1,5 +1,10 @@
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\TMan.exe
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\TMan.exe.config
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\TMan.exe
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\TMan.pdb
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.dll
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.xml
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.AdministratorDialog.resources
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.LoginForm.resources
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.Properties.Resources.resources
@@ -7,9 +12,4 @@ C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.RegularUserDialog.
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.csproj.GenerateResource.Cache
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.exe
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.pdb
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\TMan.pdb
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.dll
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.xml
-C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.csprojResolveAssemblyReference.cache
