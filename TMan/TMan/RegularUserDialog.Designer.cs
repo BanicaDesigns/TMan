@@ -152,6 +152,7 @@
             // 
             // btnAddNewComment
             // 
+            this.btnAddNewComment.ForeColor = System.Drawing.Color.Coral;
             this.btnAddNewComment.Location = new System.Drawing.Point(271, 346);
             this.btnAddNewComment.Name = "btnAddNewComment";
             this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
