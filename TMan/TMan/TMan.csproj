@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewTaskDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewTaskDialog.Designer.cs">
+      <DependentUpon>AddNewTaskDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdministratorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,7 @@
     <Compile Include="Comment.cs">
       <DependentUpon>TManDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Helpers\UserRolesEnum.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -98,6 +105,9 @@
     <Compile Include="TMUser.cs">
       <DependentUpon>TManDB.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddNewTaskDialog.resx">
+      <DependentUpon>AddNewTaskDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdministratorDialog.resx">
       <DependentUpon>AdministratorDialog.cs</DependentUpon>
     </EmbeddedResource>

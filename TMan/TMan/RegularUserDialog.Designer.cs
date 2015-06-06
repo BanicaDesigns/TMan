@@ -124,6 +124,7 @@
             this.btnAddNewTask.TabIndex = 26;
             this.btnAddNewTask.Text = "New task";
             this.btnAddNewTask.UseVisualStyleBackColor = false;
+            this.btnAddNewTask.Click += new System.EventHandler(this.btnAddNewTask_Click);
             // 
             // btnDeleteTask
             // 
