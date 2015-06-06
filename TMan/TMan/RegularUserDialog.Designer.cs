@@ -152,7 +152,7 @@
             // 
             // btnAddNewComment
             // 
-            this.btnAddNewComment.Location = new System.Drawing.Point(271, 346);
+            this.btnAddNewComment.Location = new System.Drawing.Point(271, 337);
             this.btnAddNewComment.Name = "btnAddNewComment";
             this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewComment.TabIndex = 23;
