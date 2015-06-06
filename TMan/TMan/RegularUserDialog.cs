@@ -184,6 +184,10 @@ namespace TMan
         private void btnAddNewComment_Click(object sender, EventArgs e)
         {
             var newCommentText = tbNewComment.Text;
+
+            if (newCommentText.Trim() == string.Empty)
+                return;
+
             var newCommentMadeByUserId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
             var newCommentMadeByUserName = Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[1];
             var newCommentToTask = Convert.ToInt32(tbSelectedTaskId.Text);
@@ -252,6 +256,10 @@ namespace TMan
         {
             var newTaskDialog = new AddNewTaskDialog();
             newTaskDialog.ShowDialog();
+
+            UpdateListBoxWithTasks();
+            FillUpBasicTaskInformation();
+            lbComments.Items.Clear();
         }
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
@@ -278,16 +286,12 @@ namespace TMan
                 catch (Exception ex)
                 {
                     MessageBox.Show("Deletion failed! More info:\n"+ex.Message, "Info", MessageBoxButtons.OK);
-                }
-                
-            }
-
-            
+                }               
+            }           
         }
 
         private void UpdateListBoxWithTasks()
         {
-            //Tук трябва да се презареждат записите със задачите и да се изтриват текущите попълнени неща в детайлите по задача
             FillUpBasicTaskInformation();
 
             using (TManDBEntities entities = new TManDBEntities())
