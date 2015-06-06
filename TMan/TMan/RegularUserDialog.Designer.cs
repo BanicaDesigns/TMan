@@ -169,6 +169,7 @@
             this.tbNewComment.Name = "tbNewComment";
             this.tbNewComment.Size = new System.Drawing.Size(248, 57);
             this.tbNewComment.TabIndex = 22;
+            this.tbNewComment.TextChanged += new System.EventHandler(this.tbNewComment_TextChanged);
             // 
             // panel1
             // 
