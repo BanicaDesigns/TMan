@@ -157,7 +157,7 @@
             this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewComment.TabIndex = 23;
             this.btnAddNewComment.Text = "Comment";
-            this.btnAddNewComment.UseVisualStyleBackColor = true;
+            this.btnAddNewComment.UseVisualStyleBackColor = false;
             this.btnAddNewComment.Click += new System.EventHandler(this.btnAddNewComment_Click);
             // 
             // tbNewComment
