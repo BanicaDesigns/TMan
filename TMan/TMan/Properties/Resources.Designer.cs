@@ -61,11 +61,29 @@ namespace TMan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}_{1}_{2}_{3}_{4}_{5}_{6}.
+        /// </summary>
+        internal static string SERIALIZED_TASK_TEMPL {
+            get {
+                return ResourceManager.GetString("SERIALIZED_TASK_TEMPL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [ID : {0}]   [TITLE : {1}]   [STATUS : {2}].
         /// </summary>
         internal static string TASK_LABEL_LAYOUT {
             get {
                 return ResourceManager.GetString("TASK_LABEL_LAYOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, Id:{1}.
+        /// </summary>
+        internal static string USER_IN_LAYOUT_TEMPL {
+            get {
+                return ResourceManager.GetString("USER_IN_LAYOUT_TEMPL", resourceCulture);
             }
         }
         
