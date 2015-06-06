@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace TMan
 {
     public partial class RegularUserDialog : Form
     {
+        private string InitialTaskState;
+
         public RegularUserDialog()
         {
             InitializeComponent();
+            TaskManagementTabInitialButtonsAvailability();
         }
 
         private void RegularUserDialog_FormClosed(object sender, FormClosedEventArgs e)
@@ -50,10 +54,10 @@ namespace TMan
                 }
 
                 var allAvailableUsers = from user in entities.TMUsers
-                                        select user;
+                                        select new{Username = user.Username, UserId = user.UserId};
 
                 foreach (var user in allAvailableUsers)
-                    cbSelectedTaskAssignedTo.Items.Add(user.Username);
+                    cbSelectedTaskAssignedTo.Items.Add(string.Format(Properties.Resources.USER_IN_LAYOUT_TEMPL, user.Username, user.UserId));
                 
             }
         }
@@ -66,6 +70,35 @@ namespace TMan
             FillUpBasicTaskInformation(taskObject);
 
             FillUpCommentsForTheTask(taskObject);
+
+            TaskManagementTabButtonsAvailAfterTaskSelection();
+
+            this.InitialTaskState = GetSerializedTaskStat(taskObject);
+        }
+
+        private string GetSerializedTaskStat(TMTask taskObject = null)
+        {
+            //title_description_status_assignedto_datecreated_lastmodified_estimation
+            if (taskObject != null)
+            {
+                return string.Format(Properties.Resources.SERIALIZED_TASK_TEMPL, taskObject.Title
+                                                                                , taskObject.Description
+                                                                                , taskObject.Status
+                                                                                , cbSelectedTaskAssignedTo.Text
+                                                                                , taskObject.DateCreated
+                                                                                , taskObject.DateLastModified
+                                                                                , taskObject.Estimation);
+            }
+            else
+            {
+                return string.Format(Properties.Resources.SERIALIZED_TASK_TEMPL, tbSelectedTaskTitle.Text
+                                                                                , tbSelectedTaskDescription.Text
+                                                                                , cbSelectedTasStatus.Text
+                                                                                , cbSelectedTaskAssignedTo.Text
+                                                                                , dtpSelectedTaskDateCreated.Value
+                                                                                , dtpSelectedTaskLastModified.Value
+                                                                                , tbSelectedTaskEstimation.Text);
+            }
         }
 
         private void FillUpCommentsForTheTask(TMTask taskObject)
@@ -111,9 +144,9 @@ namespace TMan
 
                 var userCreatedTask = (from user in entities.TMUsers
                                        where user.UserId == createdBy
-                                       select user.Username).FirstOrDefault();
+                                       select new { Username = user.Username, UserID = user.UserId }).FirstOrDefault();
 
-                return userCreatedTask;
+                return string.Format(Properties.Resources.USER_IN_LAYOUT_TEMPL, userCreatedTask.Username, userCreatedTask.UserID);
             }
         }
 
@@ -125,9 +158,9 @@ namespace TMan
 
                 var userAssignedForTask = (from user in entities.TMUsers
                                            where user.UserId == assignedTo
-                                           select user.Username).FirstOrDefault();
-                
-                return userAssignedForTask;
+                                           select new { Username = user.Username, UserID = user.UserId}).FirstOrDefault();
+
+                return string.Format(Properties.Resources.USER_IN_LAYOUT_TEMPL, userAssignedForTask.Username, userAssignedForTask.UserID);
             }
         }
 
@@ -164,6 +197,52 @@ namespace TMan
 
                 tbNewComment.Clear();
 
+                entities.SaveChanges();
+            }
+        }
+
+        private void TaskManagementTabInitialButtonsAvailability()
+        {
+            btnAddNewComment.Enabled = false;
+            btnDeleteTask.Enabled = false;
+            btnEditTask.Enabled = false;
+        }
+
+        private void TaskManagementTabButtonsAvailAfterTaskSelection()
+        {
+            btnAddNewComment.Enabled = true;
+            btnDeleteTask.Enabled = true;
+            btnEditTask.Enabled = true;
+        }
+
+        private void btnEditTask_Click(object sender, EventArgs e)
+        {
+            //title_description_status_assignedto_datecreated_lastmodified_estimation
+            var latestTaskCredentials = GetSerializedTaskStat();
+            var latestTaskSplitted = latestTaskCredentials.Split('_');
+
+            if (string.Compare(this.InitialTaskState, latestTaskCredentials) == 0)
+                return;
+
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                entities.Database.Connection.Open();
+
+                var task = new TMan.TMTask()
+                {
+                    TaskId = Convert.ToInt32(tbSelectedTaskId.Text),
+                    Title = latestTaskSplitted[0],
+                    Description = latestTaskSplitted[1],
+                    AssignedTo = Convert.ToInt32(cbSelectedTaskAssignedTo.Text.Split(',')[1].Split(':')[1]),
+                    CreatedBy = Convert.ToInt32(tbSelectedTaskCreatedBy.Text.Split(',')[1].Split(':')[1]),
+                    DateCreated = Convert.ToDateTime(latestTaskSplitted[4]),
+                    DateLastModified = Convert.ToDateTime(latestTaskSplitted[5]),
+                    Estimation = Convert.ToInt32(latestTaskSplitted[6]),
+                    Status = latestTaskSplitted[2]
+                };
+
+                entities.TMTasks.Attach(task);
+                entities.Entry(task).State = EntityState.Modified; 
                 entities.SaveChanges();
             }
         }
