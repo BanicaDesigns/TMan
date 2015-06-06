@@ -152,13 +152,14 @@
             // 
             // btnAddNewComment
             // 
-            this.btnAddNewComment.ForeColor = System.Drawing.Color.Coral;
+            this.btnAddNewComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnAddNewComment.ForeColor = System.Drawing.Color.Brown;
             this.btnAddNewComment.Location = new System.Drawing.Point(271, 346);
             this.btnAddNewComment.Name = "btnAddNewComment";
             this.btnAddNewComment.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewComment.TabIndex = 23;
             this.btnAddNewComment.Text = "Comment";
-            this.btnAddNewComment.UseVisualStyleBackColor = true;
+            this.btnAddNewComment.UseVisualStyleBackColor = false;
             this.btnAddNewComment.Click += new System.EventHandler(this.btnAddNewComment_Click);
             // 
             // tbNewComment
