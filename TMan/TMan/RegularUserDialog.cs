@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TMan.Helpers;
 
 namespace TMan
 {
@@ -53,12 +54,7 @@ namespace TMan
                                                                 , task.Status));
                 }
 
-                var allAvailableUsers = from user in entities.TMUsers
-                                        select new{Username = user.Username, UserId = user.UserId};
-
-                foreach (var user in allAvailableUsers)
-                    cbSelectedTaskAssignedTo.Items.Add(string.Format(Properties.Resources.USER_IN_LAYOUT_TEMPL, user.Username, user.UserId));
-                
+                CommonHelper.PopulateComboboxWithAllUsers(cbSelectedTaskAssignedTo, entities);               
             }
         }
 
@@ -245,6 +241,14 @@ namespace TMan
                 entities.Entry(task).State = EntityState.Modified; 
                 entities.SaveChanges();
             }
+        }
+
+        private void btnAddNewTask_Click(object sender, EventArgs e)
+        {
+            var newTaskDialog = new AddNewTaskDialog();
+            newTaskDialog.ShowDialog();
+            //Трябва дасе отвори диалога AddNewTask
+            //След това там трябва да се създаде и добави нова задача и да се затвори диалога
         }
     }
 }

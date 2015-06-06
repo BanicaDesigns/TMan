@@ -15,3 +15,5 @@ C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.RegularUserDialog.
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.csproj.GenerateResource.Cache
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.exe
 C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.pdb
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.csprojResolveAssemblyReference.cache
+C:\Users\Ninka\Documents\GitHub\TMan\TMan\TMan\obj\Debug\TMan.AddNewTaskDialog.resources
