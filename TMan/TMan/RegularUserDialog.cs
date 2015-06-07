@@ -42,6 +42,8 @@ namespace TMan
 
                 ReloadTasksRelatedToMe(entities, userId);
 
+                lbComments.Items.Clear();
+
                 CommonHelper.PopulateComboboxWithAllUsers(cbSelectedTaskAssignedTo, entities);               
             }
         }
@@ -114,7 +116,7 @@ namespace TMan
                 var allCommentsToTask = from comment in entities.Comments
                                         join user in entities.TMUsers on comment.MadeBy equals user.UserId
                                         join task in entities.TMTasks on comment.ToTask equals task.TaskId
-                                        where user.UserId == userId && task.TaskId == taskId
+                                        where task.TaskId == taskId
                                         select new {user.Username, comment.Text};
 
                 lbComments.Items.Clear();
