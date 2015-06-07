@@ -88,6 +88,15 @@ namespace TMan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}_{1}_{2}_{3}.
+        /// </summary>
+        internal static string USER_SERIALIZED_TEMPL {
+            get {
+                return ResourceManager.GetString("USER_SERIALIZED_TEMPL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserInfo.
         /// </summary>
         internal static string UserInfo {

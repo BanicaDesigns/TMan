@@ -117,19 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SERIALIZED_TASK_TEMPL" xml:space="preserve">
-    <value>{0}_{1}_{2}_{3}_{4}_{5}_{6}</value>
-  </data>
-  <data name="TASK_LABEL_LAYOUT" xml:space="preserve">
-    <value>[ID : {0}]   [TITLE : {1}]   [STATUS : {2}]</value>
-  </data>
-  <data name="UserInfo" xml:space="preserve">
-    <value>UserInfo</value>
-  </data>
-  <data name="USER_IN_LAYOUT_TEMPL" xml:space="preserve">
-    <value>{0}, Id:{1}</value>
-  </data>
-  <data name="USER_SERIALIZED_TEMPL" xml:space="preserve">
-    <value>{0}_{1}_{2}_{3}</value>
-  </data>
 </root>

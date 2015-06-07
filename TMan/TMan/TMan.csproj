@@ -59,6 +59,12 @@
     <Compile Include="AddNewTaskDialog.Designer.cs">
       <DependentUpon>AddNewTaskDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNewUserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewUserDialog.Designer.cs">
+      <DependentUpon>AddNewUserDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdministratorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </Compile>
     <EmbeddedResource Include="AddNewTaskDialog.resx">
       <DependentUpon>AddNewTaskDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewUserDialog.resx">
+      <DependentUpon>AddNewUserDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdministratorDialog.resx">
       <DependentUpon>AdministratorDialog.cs</DependentUpon>

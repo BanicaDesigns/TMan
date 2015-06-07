@@ -40,21 +40,26 @@ namespace TMan
 
                 var userId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
 
-                var tasksRelatedToMe = (from task in entities.TMTasks
-                                        where task.AssignedTo == userId || task.CreatedBy == userId
-                                        select task).ToArray();
-
-                lbAllTasksRelatedToMe.Items.Clear();
-
-                foreach (var task in tasksRelatedToMe)
-                {
-                    lbAllTasksRelatedToMe.Items.Add(string.Format(Properties.Resources.TASK_LABEL_LAYOUT
-                                                                , task.TaskId
-                                                                , task.Title
-                                                                , task.Status));
-                }
+                ReloadTasksRelatedToMe(entities, userId);
 
                 CommonHelper.PopulateComboboxWithAllUsers(cbSelectedTaskAssignedTo, entities);               
+            }
+        }
+
+        private void ReloadTasksRelatedToMe(TManDBEntities entities, int userId)
+        {
+            var tasksRelatedToMe = (from task in entities.TMTasks
+                                    where task.AssignedTo == userId || task.CreatedBy == userId
+                                    select task).ToArray();
+
+            lbAllTasksRelatedToMe.Items.Clear();
+
+            foreach (var task in tasksRelatedToMe)
+            {
+                lbAllTasksRelatedToMe.Items.Add(string.Format(Properties.Resources.TASK_LABEL_LAYOUT
+                                                            , task.TaskId
+                                                            , task.Title
+                                                            , task.Status));
             }
         }
 
@@ -119,17 +124,17 @@ namespace TMan
             } 
         }
 
-        private void FillUpBasicTaskInformation(TMTask taskObject)
+        private void FillUpBasicTaskInformation(TMTask taskObject = null)
         {
-            tbSelectedTaskId.Text = taskObject.TaskId.ToString();
-            tbSelectedTaskTitle.Text = taskObject.Title;
-            tbSelectedTaskDescription.Text = taskObject.Description;
-            cbSelectedTasStatus.Text = taskObject.Status;
-            cbSelectedTaskAssignedTo.Text = GetUserAssignedForTask(taskObject.AssignedTo);
-            tbSelectedTaskCreatedBy.Text = GetUserCreatedTheTask(taskObject.CreatedBy);
-            dtpSelectedTaskDateCreated.Value =(DateTime)taskObject.DateCreated;
-            dtpSelectedTaskLastModified.Value = (DateTime)taskObject.DateLastModified;
-            tbSelectedTaskEstimation.Text = taskObject.Estimation.ToString();
+            tbSelectedTaskId.Text = taskObject != null ? taskObject.TaskId.ToString() : string.Empty;
+            tbSelectedTaskTitle.Text = taskObject != null ? taskObject.Title: string.Empty;
+            tbSelectedTaskDescription.Text = taskObject != null ? taskObject.Description : string.Empty;
+            cbSelectedTasStatus.Text = taskObject != null ? taskObject.Status : string.Empty;
+            cbSelectedTaskAssignedTo.Text = taskObject != null ? GetUserAssignedForTask(taskObject.AssignedTo): string.Empty;
+            tbSelectedTaskCreatedBy.Text = taskObject != null ? GetUserCreatedTheTask(taskObject.CreatedBy): string.Empty;
+            dtpSelectedTaskDateCreated.Value = taskObject != null ? (DateTime)taskObject.DateCreated: DateTime.Now;
+            dtpSelectedTaskLastModified.Value = taskObject != null ? (DateTime)taskObject.DateLastModified : DateTime.Now;
+            tbSelectedTaskEstimation.Text = taskObject != null ? taskObject.Estimation.ToString():string.Empty;
         }
 
         private string GetUserCreatedTheTask(int? createdBy)
@@ -179,6 +184,10 @@ namespace TMan
         private void btnAddNewComment_Click(object sender, EventArgs e)
         {
             var newCommentText = tbNewComment.Text;
+
+            if (newCommentText.Trim() == string.Empty)
+                return;
+
             var newCommentMadeByUserId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
             var newCommentMadeByUserName = Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[1];
             var newCommentToTask = Convert.ToInt32(tbSelectedTaskId.Text);
@@ -247,8 +256,52 @@ namespace TMan
         {
             var newTaskDialog = new AddNewTaskDialog();
             newTaskDialog.ShowDialog();
-            //Трябва дасе отвори диалога AddNewTask
-            //След това там трябва да се създаде и добави нова задача и да се затвори диалога
+
+            UpdateListBoxWithTasks();
+            FillUpBasicTaskInformation();
+            lbComments.Items.Clear();
+        }
+
+        private void btnDeleteTask_Click(object sender, EventArgs e)
+        {
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                entities.Database.Connection.Open();
+
+                try
+                {
+                    TMTask taskFOrDelete = new TMTask()
+                    {
+                        TaskId = Convert.ToInt32(tbSelectedTaskId.Text)
+                    };
+
+                    entities.TMTasks.Attach(taskFOrDelete);
+                    entities.TMTasks.Remove(taskFOrDelete);
+                    entities.SaveChanges();
+
+                    UpdateListBoxWithTasks();
+
+                    MessageBox.Show("Deletion was successful!", "Info", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Deletion failed! More info:\n"+ex.Message, "Info", MessageBoxButtons.OK);
+                }               
+            }           
+        }
+
+        private void UpdateListBoxWithTasks()
+        {
+            FillUpBasicTaskInformation();
+
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                var userId = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]);
+                entities.Database.Connection.Open();
+                ReloadTasksRelatedToMe(entities, userId);
+            }
+
+            lbComments.Items.Clear();
         }
     }
 }
