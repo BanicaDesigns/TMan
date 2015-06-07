@@ -122,6 +122,41 @@ namespace TMan
             FillUpBasicUserInformation();
         }
 
+        private void btnDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (tbId.Text == string.Empty)
+                return;
+
+            try
+            {
+
+                using (TManDBEntities entities = new TManDBEntities())
+                {
+                    entities.Database.Connection.Open();
+
+                    TMUser userFOrDelete = new TMUser()
+                    {
+                        UserId = Convert.ToInt32(tbId.Text)
+                    };
+
+                    entities.TMUsers.Attach(userFOrDelete);
+                    entities.TMUsers.Remove(userFOrDelete);
+                    entities.SaveChanges();
+
+                    cbAllUsers.Items.Clear();
+                    CommonHelper.PopulateComboboxWithAllUsers(cbAllUsers, entities);
+                    FillUpBasicUserInformation();
+                    cbAllUsers.Text = string.Empty;
+                }
+
+                MessageBox.Show("The user was successfuly deleted!", "Info", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The user couldn't be deleted. See more:\n" + ex.Message, "Info", MessageBoxButtons.OK);
+            }
+        }
+
 
     }
 }

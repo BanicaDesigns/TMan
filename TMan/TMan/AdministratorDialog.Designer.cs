@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabUsersManagement = new System.Windows.Forms.TabPage();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.cbAllUsers = new System.Windows.Forms.ComboBox();
             this.btnAddNewUser = new System.Windows.Forms.Button();
             this.btnSaveUserChanges = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabUsersManagement.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +79,18 @@
             this.tabUsersManagement.UseWaitCursor = true;
             this.tabUsersManagement.Click += new System.EventHandler(this.tabUsersManagement_Click);
             this.tabUsersManagement.Enter += new System.EventHandler(this.tabUsersManagement_Enter);
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteUser.Location = new System.Drawing.Point(398, 40);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(111, 23);
+            this.btnDeleteUser.TabIndex = 13;
+            this.btnDeleteUser.Text = "Delete";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.UseWaitCursor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
             // 
             // cbAllUsers
             // 
@@ -210,16 +222,6 @@
             this.label12.TabIndex = 1;
             this.label12.Text = "Select user:";
             this.label12.UseWaitCursor = true;
-            // 
-            // btnDeleteUser
-            // 
-            this.btnDeleteUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteUser.Location = new System.Drawing.Point(398, 40);
-            this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.Size = new System.Drawing.Size(111, 23);
-            this.btnDeleteUser.TabIndex = 13;
-            this.btnDeleteUser.Text = "Delete";
-            this.btnDeleteUser.UseVisualStyleBackColor = true;
             // 
             // AdministratorDialog
             // 
