@@ -14,9 +14,20 @@ namespace TMan
     
     public partial class TMUser
     {
+        public TMUser()
+        {
+            this.Comments = new HashSet<Comment>();
+            this.TMTasks = new HashSet<TMTask>();
+            this.TasksReports = new HashSet<TasksReport>();
+        }
+    
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+    
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<TMTask> TMTasks { get; set; }
+        public virtual ICollection<TasksReport> TasksReports { get; set; }
     }
 }

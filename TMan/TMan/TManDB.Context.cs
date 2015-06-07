@@ -28,5 +28,6 @@ namespace TMan
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<TMTask> TMTasks { get; set; }
         public virtual DbSet<TMUser> TMUsers { get; set; }
+        public virtual DbSet<TasksReport> TasksReports { get; set; }
     }
 }

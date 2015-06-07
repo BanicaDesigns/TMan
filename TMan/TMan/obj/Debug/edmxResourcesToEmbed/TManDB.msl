@@ -36,5 +36,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TasksReports">
+      <EntityTypeMapping TypeName="TManDBModel.TasksReport">
+        <MappingFragment StoreEntitySet="TasksReports">
+          <ScalarProperty Name="DateOfReport" ColumnName="DateOfReport" />
+          <ScalarProperty Name="NumberOfHours" ColumnName="NumberOfHours" />
+          <ScalarProperty Name="ByUser" ColumnName="ByUser" />
+          <ScalarProperty Name="ToTask" ColumnName="ToTask" />
+          <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
