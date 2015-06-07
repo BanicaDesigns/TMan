@@ -90,6 +90,9 @@
     <Compile Include="RegularUserDialog.Designer.cs">
       <DependentUpon>RegularUserDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="TasksReport.cs">
+      <DependentUpon>TManDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TManDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

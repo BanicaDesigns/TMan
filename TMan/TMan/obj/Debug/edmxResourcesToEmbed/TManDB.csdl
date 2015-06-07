@@ -8,6 +8,8 @@
     <Property Name="MadeBy" Type="Int32" />
     <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="ToTask" Type="Int32" />
+    <NavigationProperty Name="TMTask" Relationship="TManDBModel.FK_Comments_TMTasks" FromRole="Comment" ToRole="TMTask" />
+    <NavigationProperty Name="TMUser" Relationship="TManDBModel.FK_Comments_TMUsers" FromRole="Comment" ToRole="TMUser" />
   </EntityType>
   <EntityType Name="TMTask">
     <Key>
@@ -24,6 +26,9 @@
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <NavigationProperty Name="TMTasks1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks" ToRole="TMTasks1" />
     <NavigationProperty Name="TMTask1" Relationship="Self.FK_TMTasks_TMTasks" FromRole="TMTasks1" ToRole="TMTasks" />
+    <NavigationProperty Name="Comments" Relationship="TManDBModel.FK_Comments_TMTasks" FromRole="TMTask" ToRole="Comment" />
+    <NavigationProperty Name="TasksReports" Relationship="TManDBModel.FK_TasksReports_TMTasks" FromRole="TMTask" ToRole="TasksReport" />
+    <NavigationProperty Name="TMUser" Relationship="TManDBModel.FK_TMTasks_TMUsers" FromRole="TMTask" ToRole="TMUser" />
   </EntityType>
   <EntityType Name="TMUser">
     <Key>
@@ -33,6 +38,9 @@
     <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="TManDBModel.FK_Comments_TMUsers" FromRole="TMUser" ToRole="Comment" />
+    <NavigationProperty Name="TMTasks" Relationship="TManDBModel.FK_TMTasks_TMUsers" FromRole="TMUser" ToRole="TMTask" />
+    <NavigationProperty Name="TasksReports" Relationship="TManDBModel.FK_TasksReports_TMUsers" FromRole="TMUser" ToRole="TasksReport" />
   </EntityType>
   <Association Name="FK_TMTasks_TMTasks">
     <End Role="TMTasks" Type="Self.TMTask" Multiplicity="1" />
@@ -54,5 +62,104 @@
       <End Role="TMTasks" EntitySet="TMTasks" />
       <End Role="TMTasks1" EntitySet="TMTasks" />
     </AssociationSet>
+    <EntitySet Name="TasksReports" EntityType="TManDBModel.TasksReport" />
+    <AssociationSet Name="FK_Comments_TMTasks" Association="TManDBModel.FK_Comments_TMTasks">
+      <End Role="TMTask" EntitySet="TMTasks" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_TMUsers" Association="TManDBModel.FK_Comments_TMUsers">
+      <End Role="TMUser" EntitySet="TMUsers" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasksReports_TMTasks" Association="TManDBModel.FK_TasksReports_TMTasks">
+      <End Role="TMTask" EntitySet="TMTasks" />
+      <End Role="TasksReport" EntitySet="TasksReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TMTasks_TMUsers" Association="TManDBModel.FK_TMTasks_TMUsers">
+      <End Role="TMUser" EntitySet="TMUsers" />
+      <End Role="TMTask" EntitySet="TMTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasksReports_TMUsers" Association="TManDBModel.FK_TasksReports_TMUsers">
+      <End Role="TMUser" EntitySet="TMUsers" />
+      <End Role="TasksReport" EntitySet="TasksReports" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="TasksReport">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ToTask" Type="Int32" />
+    <Property Name="ByUser" Type="Int32" />
+    <Property Name="NumberOfHours" Type="Int32" />
+    <Property Name="DateOfReport" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TMTask" Relationship="TManDBModel.FK_TasksReports_TMTasks" FromRole="TasksReport" ToRole="TMTask" />
+    <NavigationProperty Name="TMUser" Relationship="TManDBModel.FK_TasksReports_TMUsers" FromRole="TasksReport" ToRole="TMUser" />
+  </EntityType>
+  <Association Name="FK_Comments_TMTasks">
+    <End Type="TManDBModel.TMTask" Role="TMTask" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="TManDBModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMTask">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ToTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_TMUsers">
+    <End Type="TManDBModel.TMUser" Role="TMUser" Multiplicity="0..1" />
+    <End Type="TManDBModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="MadeBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasksReports_TMTasks">
+    <End Type="TManDBModel.TMTask" Role="TMTask" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="TManDBModel.TasksReport" Role="TasksReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMTask">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TasksReport">
+        <PropertyRef Name="ToTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TMTasks_TMUsers">
+    <End Type="TManDBModel.TMUser" Role="TMUser" Multiplicity="0..1" />
+    <End Type="TManDBModel.TMTask" Role="TMTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TMTask">
+        <PropertyRef Name="AssignedTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasksReports_TMUsers">
+    <End Type="TManDBModel.TMUser" Role="TMUser" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="TManDBModel.TasksReport" Role="TasksReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TasksReport">
+        <PropertyRef Name="ByUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

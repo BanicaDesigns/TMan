@@ -4,11 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b239dfa7eb14440a8cbdbb960ff00a78" Name="Diagram1">
+      <Diagram DiagramId="b239dfa7eb14440a8cbdbb960ff00a78" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="TManDBModel.Comment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TManDBModel.TMTask" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TManDBModel.TMUser" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="TManDBModel.FK_TMTasks_TMTasks" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TManDBModel.TasksReport" Width="1.5" PointX="5" PointY="2.25" />
+        <AssociationConnector Association="TManDBModel.FK_Comments_TMTasks" />
+        <AssociationConnector Association="TManDBModel.FK_Comments_TMUsers" />
+        <AssociationConnector Association="TManDBModel.FK_TasksReports_TMTasks" />
+        <AssociationConnector Association="TManDBModel.FK_TMTasks_TMUsers" />
+        <AssociationConnector Association="TManDBModel.FK_TasksReports_TMUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

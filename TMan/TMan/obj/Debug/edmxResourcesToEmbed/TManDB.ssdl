@@ -9,6 +9,16 @@
     <Property Name="Text" Type="text" />
     <Property Name="ToTask" Type="int" />
   </EntityType>
+  <EntityType Name="TasksReports">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ToTask" Type="int" />
+    <Property Name="ByUser" Type="int" />
+    <Property Name="NumberOfHours" Type="int" />
+    <Property Name="DateOfReport" Type="datetime" />
+  </EntityType>
   <EntityType Name="TMTasks">
     <Key>
       <PropertyRef Name="TaskId" />
@@ -32,25 +42,96 @@
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <Association Name="FK_TMTasks_TMTasks">
-    <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="1" />
-    <End Role="TMTasks1" Type="Self.TMTasks" Multiplicity="0..1" />
+  <Association Name="FK_Comments_TMTasks">
+    <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TMTasks">
         <PropertyRef Name="TaskId" />
       </Principal>
-      <Dependent Role="TMTasks1">
+      <Dependent Role="Comments">
+        <PropertyRef Name="ToTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_TMUsers">
+    <End Role="TMUsers" Type="Self.TMUsers" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="MadeBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasksReports_TMTasks">
+    <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TasksReports" Type="Self.TasksReports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMTasks">
         <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TasksReports">
+        <PropertyRef Name="ToTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TasksReports_TMUsers">
+    <End Role="TMUsers" Type="Self.TMUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TasksReports" Type="Self.TasksReports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TasksReports">
+        <PropertyRef Name="ByUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TMTasks_TMUsers">
+    <End Role="TMUsers" Type="Self.TMUsers" Multiplicity="0..1" />
+    <End Role="TMTasks" Type="Self.TMTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TMUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TMTasks">
+        <PropertyRef Name="AssignedTo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="TManDBModelStoreContainer">
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TasksReports" EntityType="Self.TasksReports" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TMTasks" EntityType="Self.TMTasks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TMUsers" EntityType="Self.TMUsers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_TMTasks_TMTasks" Association="Self.FK_TMTasks_TMTasks">
+    <AssociationSet Name="FK_Comments_TMTasks" Association="Self.FK_Comments_TMTasks">
       <End Role="TMTasks" EntitySet="TMTasks" />
-      <End Role="TMTasks1" EntitySet="TMTasks" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_TMUsers" Association="Self.FK_Comments_TMUsers">
+      <End Role="TMUsers" EntitySet="TMUsers" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasksReports_TMTasks" Association="Self.FK_TasksReports_TMTasks">
+      <End Role="TMTasks" EntitySet="TMTasks" />
+      <End Role="TasksReports" EntitySet="TasksReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasksReports_TMUsers" Association="Self.FK_TasksReports_TMUsers">
+      <End Role="TMUsers" EntitySet="TMUsers" />
+      <End Role="TasksReports" EntitySet="TasksReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TMTasks_TMUsers" Association="Self.FK_TMTasks_TMUsers">
+      <End Role="TMUsers" EntitySet="TMUsers" />
+      <End Role="TMTasks" EntitySet="TMTasks" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

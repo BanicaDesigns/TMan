@@ -76,7 +76,7 @@ namespace TMan
 
             TaskManagementTabButtonsAvailAfterTaskSelection();
 
-            this.InitialTaskState = GetSerializedTaskStat(taskObject);
+            this.InitialTaskState = GetSerializedTaskStat(taskObject);          
         }
 
         private string GetSerializedTaskStat(TMTask taskObject = null)
@@ -220,6 +220,14 @@ namespace TMan
             btnAddNewComment.Enabled = true;
             btnDeleteTask.Enabled = true;
             btnEditTask.Enabled = true;
+
+            var taskIsAssignedToMe = (cbSelectedTaskAssignedTo.Text.Split(',')[1].Split(':')[1] == Environment
+                                                                                                        .GetEnvironmentVariable(Properties.Resources.UserInfo)
+                                                                                                        .Split('_')[0]);
+
+            btnReportWorkOnTask.Visible = taskIsAssignedToMe? true : false;
+            lblHoursSpentOnTask.Visible = taskIsAssignedToMe ? true : false;
+            nudNumberOfHours.Visible = taskIsAssignedToMe ? true : false;
         }
 
         private void btnEditTask_Click(object sender, EventArgs e)
@@ -304,6 +312,35 @@ namespace TMan
             }
 
             lbComments.Items.Clear();
+        }
+
+        private void btnReportWorkOnTask_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var toTaskId = Convert.ToInt32(tbSelectedTaskId.Text);
+
+                var reportOnTask = new TMan.TasksReport()
+                {
+                    ToTask = toTaskId,
+                    ByUser = Convert.ToInt32(Environment.GetEnvironmentVariable(Properties.Resources.UserInfo).Split('_')[0]),
+                    NumberOfHours = Convert.ToInt32(nudNumberOfHours.Value),
+                    DateOfReport = DateTime.Now
+                };
+
+                using (TManDBEntities entities = new TManDBEntities())
+                {
+                    entities.Database.Connection.Open();
+                    entities.TasksReports.Add(reportOnTask);
+                    entities.SaveChanges();
+                }
+
+                MessageBox.Show("The report on task was successfuly added!", "Info", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The report on task failed to get added! See more:\n"+ex.Message, "Info", MessageBoxButtons.OK);
+            }
         }
     }
 }

@@ -12,12 +12,13 @@ namespace TMan
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class TasksReport
     {
-        public int CommentId { get; set; }
-        public Nullable<int> MadeBy { get; set; }
-        public string Text { get; set; }
+        public int ReportId { get; set; }
         public Nullable<int> ToTask { get; set; }
+        public Nullable<int> ByUser { get; set; }
+        public Nullable<int> NumberOfHours { get; set; }
+        public Nullable<System.DateTime> DateOfReport { get; set; }
     
         public virtual TMTask TMTask { get; set; }
         public virtual TMUser TMUser { get; set; }

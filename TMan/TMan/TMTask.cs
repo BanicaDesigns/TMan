@@ -14,6 +14,12 @@ namespace TMan
     
     public partial class TMTask
     {
+        public TMTask()
+        {
+            this.Comments = new HashSet<Comment>();
+            this.TasksReports = new HashSet<TasksReport>();
+        }
+    
         public int TaskId { get; set; }
         public string Title { get; set; }
         public Nullable<int> AssignedTo { get; set; }
@@ -26,5 +32,8 @@ namespace TMan
     
         public virtual TMTask TMTasks1 { get; set; }
         public virtual TMTask TMTask1 { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<TasksReport> TasksReports { get; set; }
+        public virtual TMUser TMUser { get; set; }
     }
 }
