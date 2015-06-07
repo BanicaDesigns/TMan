@@ -41,6 +41,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabUsersManagement.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             this.tabUsersManagement.BackColor = System.Drawing.Color.Honeydew;
             this.tabUsersManagement.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabUsersManagement.Controls.Add(this.btnDeleteUser);
             this.tabUsersManagement.Controls.Add(this.cbAllUsers);
             this.tabUsersManagement.Controls.Add(this.btnAddNewUser);
             this.tabUsersManagement.Controls.Add(this.btnSaveUserChanges);
@@ -98,6 +100,7 @@
             this.btnAddNewUser.Text = "Add new";
             this.btnAddNewUser.UseVisualStyleBackColor = true;
             this.btnAddNewUser.UseWaitCursor = true;
+            this.btnAddNewUser.Click += new System.EventHandler(this.btnAddNewUser_Click);
             // 
             // btnSaveUserChanges
             // 
@@ -208,6 +211,16 @@
             this.label12.Text = "Select user:";
             this.label12.UseWaitCursor = true;
             // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteUser.Location = new System.Drawing.Point(398, 40);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(111, 23);
+            this.btnDeleteUser.TabIndex = 13;
+            this.btnDeleteUser.Text = "Delete";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            // 
             // AdministratorDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +251,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbAllUsers;
+        private System.Windows.Forms.Button btnDeleteUser;
 
     }
 }

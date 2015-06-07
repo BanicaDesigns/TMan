@@ -50,10 +50,7 @@ namespace TMan
                                         where user.UserId == userId
                                         select user).FirstOrDefault();
 
-                tbUserName.Text = userFromDatabase.Username;
-                tbPassword.Text = userFromDatabase.Password;
-                cbRole.Text = userFromDatabase.Role;
-                tbId.Text = userFromDatabase.UserId.ToString();
+                FillUpBasicUserInformation(userFromDatabase);
 
                 SelectedUserCredentialsSerialized = string.Format(Properties.Resources.USER_SERIALIZED_TEMPL
                                                                 , userFromDatabase.UserId
@@ -61,6 +58,14 @@ namespace TMan
                                                                 , userFromDatabase.Password
                                                                 , userFromDatabase.Role);
             }            
+        }
+
+        private void FillUpBasicUserInformation(TMUser userFromDatabase = null)
+        {
+            tbUserName.Text = userFromDatabase != null ? userFromDatabase.Username : string.Empty;
+            tbPassword.Text = userFromDatabase != null ?userFromDatabase.Password : string.Empty;
+            cbRole.Text = userFromDatabase != null ?userFromDatabase.Role : string.Empty;
+            tbId.Text = userFromDatabase != null ?userFromDatabase.UserId.ToString() : string.Empty;
         }
 
         private void btnSaveUserChanges_Click(object sender, EventArgs e)
@@ -101,6 +106,20 @@ namespace TMan
             {
                 MessageBox.Show("Update failed", "Info", MessageBoxButtons.OK);
             }
+        }
+
+        private void btnAddNewUser_Click(object sender, EventArgs e)
+        {
+            var addNewUserDialog = new AddNewUserDialog();
+            addNewUserDialog.ShowDialog();
+
+            using (TManDBEntities entities = new TManDBEntities())
+            {
+                cbAllUsers.Items.Clear();
+                CommonHelper.PopulateComboboxWithAllUsers(cbAllUsers, entities);
+            }
+
+            FillUpBasicUserInformation();
         }
 
 
